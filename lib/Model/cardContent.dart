@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
 class CardContent extends Column {
-  CardContent({
+  CardContent({super.key, 
     required TextEditingController? textEditingController,
     required IconData icon,
     required String cardTitle,
@@ -18,7 +18,7 @@ class CardContent extends Column {
                   Text(
                     cardTitle,
                     style: GoogleFonts.firaCode(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 24,
                       ),
                     ),
@@ -26,23 +26,23 @@ class CardContent extends Column {
                 ],
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: textEditingController, // especificando o controlador
               decoration: InputDecoration(
-                prefixIcon: Icon(Iconsax.search_normal),
+                prefixIcon: const Icon(Iconsax.search_normal),
                 hintText: placeholder,
                 contentPadding: EdgeInsets.zero,
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
+                  borderSide: const BorderSide(color: Colors.grey),
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
-              child: Text('Pesquisar'),
               onPressed: function,
+              child: const Text('Pesquisar'),
             ),
           ],
         );

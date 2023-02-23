@@ -1,27 +1,30 @@
-import 'dart:html';
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:correios_rastreio/correios_rastreio.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
-import 'package:projeto_perguntas/Model/TrackField.dart';
+import 'Model/trackField.dart';
 import 'Model/cardContent.dart';
 import 'Model/cardTrack.dart';
+import 'Util/colorModel.dart';
 import 'api/apiRest.dart';
 
 void main() {
-  return runApp(PerguntaApp());
+  return runApp(const PerguntaApp());
 }
 
 class PerguntaAppState extends State<PerguntaApp> {
   var novaPergunta = 0;
   RastreioModel? apiResponse;
 
-  void ptRouter() {
-    apiResponse =
-        ApiRest.getPackageTraking(_TrackingController) as RastreioModel;
+  void ptRouter() async {
+    var rastro = await ApiRest.getPackageTraking(_TrackingController);
+    setState(()  {
+      apiResponse = rastro;
+    });
   }
-
+//LB783950019HK
 //JN799920292BR
   final TextEditingController _TrackingController =
       TextEditingController(); // controlador para o TextField
@@ -30,11 +33,11 @@ class PerguntaAppState extends State<PerguntaApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 230, 230, 230),
+        backgroundColor: colorBackground,
         appBar: AppBar(
           leading: GestureDetector(
             onTap: () {},
-            child: Icon(
+            child: const Icon(
               Iconsax.menu_1, // add custom icons also
             ),
           ),
@@ -42,7 +45,7 @@ class PerguntaAppState extends State<PerguntaApp> {
             child: Text(
               "Correios+",
               style: GoogleFonts.inter(
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
@@ -61,7 +64,10 @@ class PerguntaAppState extends State<PerguntaApp> {
                 function: ptRouter,
               ),
             ),
-            if (apiResponse != null) getLastTrackResponse(apiResponse!),
+            if (apiResponse != null) 
+              TrackField.unic(
+                event: apiResponse!.events.first
+                ),
           ],
         ),
       ),
@@ -69,11 +75,9 @@ class PerguntaAppState extends State<PerguntaApp> {
   }
 }
 
-getLastTrackResponse(RastreioModel? apiResponse) {
-  TrackField.last(event: apiResponse?.events.last);
-}
-
 class PerguntaApp extends StatefulWidget {
+  const PerguntaApp({super.key});
+
   @override
   PerguntaAppState createState() => PerguntaAppState();
 }

@@ -8,17 +8,6 @@ class ApiRest {
     var correios = CorreiosRastreio();
     final package = await correios.rastrearEncomenda(trackingController.text);
     print("código do rastreio: ${package.code}");
-    for (RastreioEvent historico in package.events) {
-      print("=>");
-      print("   Data: ${historico.data}");
-      print("   Hora: ${historico.hora}");
-      print("   Local: ${historico.local}");
-      print("   Status: ${historico.status}");
-      print("   Origim: ${historico.origem}");
-      print("   Destino: ${historico.destino}");
-      print("<=");
-    }
-
     return package;
   }
 /*
