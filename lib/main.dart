@@ -4,26 +4,34 @@ import 'package:correios_rastreio/correios_rastreio.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'Model/Cep.dart';
 import 'Model/trackField.dart';
 import 'Model/cardContent.dart';
 import 'Model/cardTrack.dart';
+import 'Util/app_routes.dart';
 import 'Util/colorModel.dart';
 import 'api/apiRest.dart';
+import 'components/main_drawer.dart';
+import 'components/app_bar_model.dart';
+import 'components/unic_Traking.dart';
+import 'screens/cep_tracking_screen.dart';
+import 'screens/package_detail_screen.dart';
+import 'screens/package_tracking_screen.dart';
 
 void main() {
   return runApp(const PerguntaApp());
 }
 
 class PerguntaAppState extends State<PerguntaApp> {
-  var novaPergunta = 0;
   RastreioModel? apiResponse;
 
   void ptRouter() async {
     var rastro = await ApiRest.getPackageTraking(_TrackingController);
-    setState(()  {
+    setState(() {
       apiResponse = rastro;
     });
   }
+
 //LB783950019HK
 //JN799920292BR
   final TextEditingController _TrackingController =
@@ -32,46 +40,31 @@ class PerguntaAppState extends State<PerguntaApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: colorBackground,
-        appBar: AppBar(
-          leading: GestureDetector(
-            onTap: () {},
-            child: const Icon(
-              Iconsax.menu_1, // add custom icons also
-            ),
-          ),
-          title: Center(
-            child: Text(
-              "Correios+",
-              style: GoogleFonts.inter(
-                textStyle: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+        home: Scaffold(
+          backgroundColor: colorBackground,
+          appBar: AppBarModel(),
+          drawer: MainDrawer(),
+          body: Column(
+            children: [
+              CardTrack(
+                child: CardContent(
+                  textEditingController: _TrackingController,
+                  icon: Iconsax.box,
+                  cardTitle: "Rastreamento",
+                  placeholder: "AA123456789BR",
+                  function: ptRouter,
                 ),
               ),
-            ),
+              if (apiResponse != null)
+                UnicTracking(apiResponse: apiResponse!),
+            ],
           ),
         ),
-        body: Column(
-          children: [
-            CardTrack(
-              child: CardContent(
-                textEditingController: _TrackingController,
-                icon: Iconsax.box,
-                cardTitle: "Package Traking",
-                placeholder: "AA123456789BR",
-                function: ptRouter,
-              ),
-            ),
-            if (apiResponse != null) 
-              TrackField.unic(
-                event: apiResponse!.events.first
-                ),
-          ],
-        ),
-      ),
-    );
+        routes: {
+          //AppRoutes.HOME: (ctx) => PackageTracking(),
+          AppRoutes.CEPTRACKING: (context) => CepTracking(),
+          AppRoutes.PACKGAGE_DETAILS: (context) => PackageDetailScreen(apiResponse!)
+        });
   }
 }
 

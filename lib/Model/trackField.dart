@@ -6,9 +6,9 @@ import '../Util/colorModel.dart';
 import '../Util/iconModel.dart';
 
 class TrackField extends Container {
-  TrackField.unic({super.key, required RastreioEvent event})
+  TrackField.unic({super.key, required RastreioEvent event, EdgeInsetsGeometry? marginal = const EdgeInsets.fromLTRB(20, 10, 20, 10)})
       : super(
-          margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+          margin: marginal,
           child: Row(
             children: [
               FittedBox(
@@ -17,8 +17,7 @@ class TrackField extends Container {
                     IconModel.getIconData(event.status),
                     color: colorBlue,
                     size: max(20, 50),
-                  )
-                ),
+                  )),
               const SizedBox(width: 6),
               Expanded(
                 child: Column(
@@ -73,13 +72,12 @@ class TrackField extends Container {
           ),
         );
 
-  TrackField({super.key, required List<RastreioEvent> events}) 
-  : super(
-    child: Column(
-      children: [
-        for (RastreioEvent event in events)
-          TrackField.unic(event: event),
-      ],
-    ),
-  );
+  TrackField({super.key, required List<RastreioEvent> events})
+      : super(
+          child: Column(
+            children: [
+              for (RastreioEvent event in events) TrackField.unic(event: event, marginal: EdgeInsets.fromLTRB(0, 10, 0, 10)),
+            ],
+          ),
+        );
 }
