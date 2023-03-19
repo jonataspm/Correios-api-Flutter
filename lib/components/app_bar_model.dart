@@ -7,8 +7,8 @@ class AppBarModel extends AppBar {
     super.key,
   }) : super(
           title: Text(
-            "Buscorreos",
-            style: GoogleFonts.firaCode(
+            "Buscomendas",
+            style: GoogleFonts.inter(
               textStyle: const TextStyle(
                 fontSize: 30,
                 //fontWeight: FontWeight.bold,

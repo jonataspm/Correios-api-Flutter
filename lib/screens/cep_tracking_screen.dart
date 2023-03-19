@@ -16,7 +16,7 @@ import 'package:iconsax/iconsax.dart';
 class CepTrackingScreen extends State<CepTracking> {
   var apiResponse;
 
-  void ptRouter() async {
+  Future<void> ptRouter() async {
     var cepResponse = await ApiRest.getCepTraking(_TrackingController);
     setState(() {
       apiResponse = cepResponse;
@@ -41,7 +41,7 @@ class CepTrackingScreen extends State<CepTracking> {
               icon: Iconsax.location,
               cardTitle: "Consultar Cep",
               placeholder: "00000-000",
-              function: ptRouter,
+              onPressed: ptRouter,
             ),
           ),
 

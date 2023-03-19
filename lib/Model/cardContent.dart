@@ -2,22 +2,55 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
-class CardContent extends Column {
-  CardContent({super.key, 
-    required TextEditingController? textEditingController,
-    required IconData icon,
-    required String cardTitle,
-    required String placeholder,
-    required void Function() function,
-  }) : super(
+class CardContent extends StatefulWidget {
+  final TextEditingController? textEditingController;
+  final IconData icon;
+  final String cardTitle;
+  final String placeholder;
+  final Future<void> Function() onPressed;
+
+  const CardContent({
+    Key? key,
+    required this.textEditingController,
+    required this.icon,
+    required this.cardTitle,
+    required this.placeholder,
+    required this.onPressed,
+  }) : super(key: key);
+
+  @override
+  _CardContentState createState() => _CardContentState();
+}
+
+class _CardContentState extends State<CardContent> {
+  bool _isLoading = false;
+
+  Future<void> _handleButtonPress() async {
+    setState(() {
+      _isLoading = true;
+    });
+    await widget.onPressed();
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(
-              child: Row(
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(icon),
+                  Icon(widget.icon,size: 50,),
+                  const SizedBox(width: 10),
                   Text(
-                    cardTitle,
-                    style: GoogleFonts.firaCode(
+                    widget.cardTitle,
+                    style: GoogleFonts.inter(
                       textStyle: const TextStyle(
                         fontSize: 24,
                       ),
@@ -26,24 +59,35 @@ class CardContent extends Column {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: textEditingController, // especificando o controlador
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Iconsax.search_normal),
-                hintText: placeholder,
-                contentPadding: EdgeInsets.zero,
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: function,
-              child: const Text('Pesquisar'),
-            ),
           ],
-        );
+        ),
+        const SizedBox(height: 10),
+        TextField(
+          controller: widget.textEditingController,
+          decoration: InputDecoration(
+            prefixIcon: const Icon(Iconsax.search_normal),
+            hintText: widget.placeholder,
+            contentPadding: EdgeInsets.zero,
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.grey),
+              borderRadius: BorderRadius.circular(50),
+            ),
+          ),
+        ),
+        const SizedBox(height: 10),
+        ElevatedButton(
+          onPressed: _isLoading ? null : _handleButtonPress,
+          child: _isLoading
+              ? SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                  ),
+                )
+              : const Text('Pesquisar'),
+        ),
+      ],
+    );
+  }
 }

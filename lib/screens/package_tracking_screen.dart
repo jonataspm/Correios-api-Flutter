@@ -31,7 +31,7 @@ class PackageTrackingScreen extends State<PackageTracking>{
                 icon: Iconsax.box,
                 cardTitle: "Package Traking",
                 placeholder: "AA123456789BR",
-                function: ptRouter,
+                onPressed: ptRouter,
               ),
             ),
             if (apiResponse != null)
@@ -43,7 +43,7 @@ class PackageTrackingScreen extends State<PackageTracking>{
   }
 
   //LB783950019HK - JN799920292BR
-  void ptRouter() async {
+  Future<void> ptRouter() async {
     var rastro = await ApiRest.getPackageTraking(_TrackingController);
     setState(() {
       apiResponse = rastro;

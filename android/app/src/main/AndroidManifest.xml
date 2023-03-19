@@ -2,7 +2,7 @@
     package="com.example.projeto_perguntas">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="Buscorreios"
+        android:label="Buscomendas"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

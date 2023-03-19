@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'package:correios_rastreio/correios_rastreio.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
@@ -25,7 +23,7 @@ void main() {
 class PerguntaAppState extends State<PerguntaApp> {
   RastreioModel? apiResponse;
 
-  void ptRouter() async {
+  Future<void> ptRouter() async {
     var rastro = await ApiRest.getPackageTraking(_TrackingController);
     setState(() {
       apiResponse = rastro;
@@ -52,7 +50,7 @@ class PerguntaAppState extends State<PerguntaApp> {
                   icon: Iconsax.box,
                   cardTitle: "Rastreamento",
                   placeholder: "AA123456789BR",
-                  function: ptRouter,
+                  onPressed: ptRouter,
                 ),
               ),
               if (apiResponse != null)

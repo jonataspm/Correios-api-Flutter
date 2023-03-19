@@ -18,16 +18,17 @@ class PackageDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          backgroundColor: colorBackground,
-          appBar: AppBarModel(),
-          body: CardTrack(
+        backgroundColor: colorBackground,
+        appBar: AppBarModel(),
+        body: ListView(children: [
+          CardTrack(
             child: Column(
               children: [
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
                     rastreio.code,
-                    style: GoogleFonts.firaCode(
+                    style: GoogleFonts.inter(
                       textStyle: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -44,6 +45,6 @@ class PackageDetailScreen extends StatelessWidget {
               ],
             ),
           ),
-    );
+        ]));
   }
 }
