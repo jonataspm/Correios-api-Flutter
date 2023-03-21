@@ -1,16 +1,30 @@
-# projeto_perguntas
+# Buscomendas
+Aplicação desenvolvida em flutter, para uma busca simples de encomendas disponibilizadoss pelos correios.
 
-A new Flutter project.
+## Restrições
+Esta aplicação foi desenvolvida pra a disciplina **Engenharia de Software**. Por mais que a mesma ainda possua validações básicas, pode ocorrer inconsistência, pois a api utilizada para consulta não passou de um scraping, ja que, o correios cobram para utilização de sua api.
 
-## Getting Started
+- Impossibilidade de fazer a consulta.
+q2
+## Features
+- A API possui as funcionalidades básicas de retorna todos **situação** da encomenda.
+- Não ha necesssidade de conta.
 
-This project is a starting point for a Flutter application.
+# Funcionamento
+O funcionamento da aplicação é simples e direto.
+> Nota: Para fazer a consulta, deve-se utilizar um **Codigo de Rastreio** valido.
 
-A few resources to get you started if this is your first Flutter project:
+# Estudo de Implantação:
+## MVP _(v0)_
+- Construção de componentre para busca
+- Rastreio completo da encomenda
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## _(v1)_
+- Login / entrada rapida
+- Favoritos
+- Persistencia das encomendas em memoria
+- Persistencia do codigo em banco de dados
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## _(v2)_
+- Refatoração do codigo
+- Clean code

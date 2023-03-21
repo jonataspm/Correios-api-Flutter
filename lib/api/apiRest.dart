@@ -1,10 +1,10 @@
 import 'dart:convert';
-
 import 'package:correios_rastreio/correios_rastreio.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 import '../api/url.dart';
 import '../Model/Cep.dart';
-import 'package:http/http.dart' as http;
 
 class ApiRest {
   static Future<RastreioModel> getPackageTraking( TextEditingController trackingController) async {
@@ -16,7 +16,7 @@ class ApiRest {
 
   static Future<Cep> getCepTraking(
       TextEditingController trackingController) async {
-    final url = Uri.parse('${BASECEP}/${trackingController.text}/json');
+    final url = Uri.parse('$BASECEP/${trackingController.text}/json');
     final response = await http.get(url, headers: {
       'content-type': 'text; charset=utf-8',
       'cache-control': 'no-cache'

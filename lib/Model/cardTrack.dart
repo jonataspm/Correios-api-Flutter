@@ -20,7 +20,7 @@ class CardTrack extends Container {
                 spreadRadius: 5,
                 blurRadius: 7,
                 offset: const Offset(0, 3),
-              ),
+              ), 
             ],
           ),
         );

@@ -5,6 +5,8 @@ import 'package:iconsax/iconsax.dart';
 import '/Util/app_routes.dart';
 
 class MainDrawer extends StatelessWidget {
+  const MainDrawer({super.key});
+
   Widget _createItem(IconData icon, String label, Function() onTapFunc) {
     return ListTile(
       leading: Icon(
@@ -15,7 +17,7 @@ class MainDrawer extends StatelessWidget {
       
       title: Text(
         label,
-        style: GoogleFonts.firaCode(
+        style: GoogleFonts.inter(
           textStyle: const TextStyle(
             fontSize: 16,
           ),
@@ -39,18 +41,18 @@ class MainDrawer extends StatelessWidget {
             // ),
             //const SizedBox(width: 6),
             Container(
+              height: 120,
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
               child: Text(
                 "Menu",
-                style: GoogleFonts.firaCode(
+                style: GoogleFonts.inter(
                   textStyle: const TextStyle(
                     fontSize: 24,
                   ),
                   color: Colors.white,
                 ),
               ),
-              height: 120,
-              width: double.infinity,
-              padding: EdgeInsets.all(20),
             ),
             _createItem(Iconsax.box, 'Rastrear Encomendas',
                 () => Navigator.of(context).pushNamed(AppRoutes.HOME)),

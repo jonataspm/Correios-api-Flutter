@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 const BASECEP = 'https://viacep.com.br/ws';
 const BASECORREIOS = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx';
 const BASERASTREIO = 'https://www.linkcorreios.com.br';

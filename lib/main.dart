@@ -1,9 +1,7 @@
 import 'package:correios_rastreio/correios_rastreio.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
-import 'Model/Cep.dart';
-import 'Model/trackField.dart';
+
 import 'Model/cardContent.dart';
 import 'Model/cardTrack.dart';
 import 'Util/app_routes.dart';
@@ -14,30 +12,39 @@ import 'components/app_bar_model.dart';
 import 'components/unic_Traking.dart';
 import 'screens/cep_tracking_screen.dart';
 import 'screens/package_detail_screen.dart';
-import 'screens/package_tracking_screen.dart';
+
 
 void main() {
   return runApp(const PerguntaApp());
 }
 
 class PerguntaAppState extends State<PerguntaApp> {
+  final  _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   RastreioModel? apiResponse;
 
   Future<void> ptRouter() async {
-    var rastro = await ApiRest.getPackageTraking(_TrackingController);
-    setState(() {
-      apiResponse = rastro;
-    });
+    try{
+      var rastro = await ApiRest.getPackageTraking(_TrackingController);
+      setState(() {
+        apiResponse = rastro;
+      });
+    } on CodeNotFound catch (e) {
+      final snackBar = SnackBar(
+        content: Text("Código de rastreio não encontrado", selectionColor: colorWhite, ),
+        duration: Duration(seconds: 3),
+        backgroundColor: Colors.red,
+      );
+      _scaffoldKey.currentState?.showSnackBar(snackBar);
+    }
   }
 
-//LB783950019HK
-//JN799920292BR
   final TextEditingController _TrackingController =
-      TextEditingController(); // controlador para o TextField
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        scaffoldMessengerKey: _scaffoldKey,
         home: Scaffold(
           backgroundColor: colorBackground,
           appBar: AppBarModel(),
@@ -59,12 +66,12 @@ class PerguntaAppState extends State<PerguntaApp> {
           ),
         ),
         routes: {
-          //AppRoutes.HOME: (ctx) => PackageTracking(),
           AppRoutes.CEPTRACKING: (context) => CepTracking(),
           AppRoutes.PACKGAGE_DETAILS: (context) => PackageDetailScreen(apiResponse!)
         });
   }
 }
+
 
 class PerguntaApp extends StatefulWidget {
   const PerguntaApp({super.key});

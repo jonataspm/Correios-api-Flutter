@@ -26,6 +26,7 @@ class _CardContentState extends State<CardContent> {
   bool _isLoading = false;
 
   Future<void> _handleButtonPress() async {
+    try{
     setState(() {
       _isLoading = true;
     });
@@ -33,6 +34,13 @@ class _CardContentState extends State<CardContent> {
     setState(() {
       _isLoading = false;
     });
+    }
+    catch(e){
+      setState(() {
+        _isLoading = false;
+      });
+      throw e;
+    }
   }
 
   @override

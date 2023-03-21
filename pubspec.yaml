@@ -1,5 +1,5 @@
-name: easyCorreios
-description: A new Flutter project.
+name: Buscomendas
+description: Aplicação desenvolvida em flutter, para uma busca simples de encomendas disponibilizadoss pelos correios.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

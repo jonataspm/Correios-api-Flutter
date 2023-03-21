@@ -71,7 +71,7 @@ class TrackField extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${event.status}",
+                  event.status,
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
                       color: colorBlue,

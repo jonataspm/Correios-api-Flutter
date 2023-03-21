@@ -1,17 +1,14 @@
-import 'dart:math';
-
 import 'package:correios_rastreio/correios_rastreio.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+
 import '../Model/trackField.dart';
 import '../Util/app_routes.dart';
-import '../Util/colorModel.dart';
 
 class UnicTracking extends StatelessWidget {
   final RastreioModel apiResponse;
 
-  const UnicTracking({required this.apiResponse});
+  const UnicTracking({super.key, required this.apiResponse});
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +20,6 @@ class UnicTracking extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-                child: TrackField.unic(event: apiResponse.events.first),
-               // margin: const EdgeInsets.only(left: 20, top: 20, bottom: 20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: const BorderRadius.only(
@@ -40,6 +35,7 @@ class UnicTracking extends StatelessWidget {
                     ),
                   ],
                 ),
+                child: TrackField.unic(event: apiResponse.events.first),
               ),
             ),
             ElevatedButton(

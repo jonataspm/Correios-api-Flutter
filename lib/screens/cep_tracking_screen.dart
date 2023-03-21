@@ -1,17 +1,14 @@
 import 'dart:math';
-
-import 'package:easyCorreios/Util/colorModel.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
-import '../Model/Cep.dart';
+import '../Util/colorModel.dart';
 import '../components/app_bar_model.dart';
 import '../components/main_drawer.dart';
-import 'package:flutter/material.dart';
 import '../api/apiRest.dart';
 import '../Model/cardContent.dart';
 import '../Model/cardTrack.dart';
-import '../Model/trackField.dart';
-import 'package:iconsax/iconsax.dart';
 
 class CepTrackingScreen extends State<CepTracking> {
   var apiResponse;
